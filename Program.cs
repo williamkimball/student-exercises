@@ -181,7 +181,7 @@ namespace nss
 
             Dictionary<int, Exercise> verboseExercises = new Dictionary<int, Exercise>();
 
-            db.Query<Exercise, Student, Cohort, Exercise>(@"
+            db.Query<Exercise, Student, Cohort, StudentExercise, Instructor, Exercise>(@"
                 SELECT
                        e.Id,
                        e.Name,
@@ -191,18 +191,26 @@ namespace nss
                        s.LastName,
                        s.SlackHandle,
                        c.Id,
-                       c.Name
+                       c.Name, 
+                       se.id,
+                       se.InstructorId,
+                       i.Id,
+                       i.FirstName,
+                       i.LastName,
+                       i.SlackHandle
                 FROM Exercise e
                 JOIN StudentExercise se ON e.Id = se.ExerciseId
+                JOIN Instructor i ON i.Id = se.InstructorId
                 JOIN Student s ON se.StudentId = s.Id
                 JOIN Cohort c ON s.CohortId = c.Id
-            ", (exercise, student, cohort) =>
+            ", (exercise, student, cohort, studentExercise, instructor) =>
             {
                 if (!verboseExercises.ContainsKey(exercise.Id))
                 {
                     verboseExercises[exercise.Id] = exercise;
                 }
                 student.Cohort = cohort;
+                exercise.Instructor = instructor;
                 verboseExercises[exercise.Id].AssignedStudents.Add(student);
                 return exercise;
             });
@@ -212,15 +220,22 @@ namespace nss
              */
             foreach (KeyValuePair<int, Exercise> exercise in verboseExercises)
             {
-                List<string> assignedStudents = new List<string>();
-                exercise.Value.AssignedStudents.ForEach(e => assignedStudents.Add(e.FirstName));
-                List<String> assignedStudentsCohort = new List<String>();
-                exercise.Value.AssignedStudents.ForEach(e => assignedStudentsCohort.Add(e.Cohort.Name));
+                List<Student> assignedStudents = new List<Student>();
+                exercise.Value.AssignedStudents.ForEach(e => assignedStudents.Add(e));
+                // List<String> assignedStudentsCohort = new List<String>();
+                // exercise.Value.AssignedStudents.ForEach(e => assignedStudentsCohort.Add(e.Cohort.Name));
 
                 StringBuilder output = new StringBuilder(100);
-                output.Append($"{exercise.Value.Name} ");
-                output.Append($"has {String.Join(',', assignedStudents)} from {String.Join(',', assignedStudentsCohort)} working on it.");
-                // output.Append($"in {exercise.Value.} ");
+                output.Append($"{exercise.Value.Name} has the following students working on it.");
+
+                output.AppendLine();
+
+                foreach(Student student in assignedStudents) {
+                string studCohort = $" {student.FirstName} {student.LastName} in {student.Cohort.Name} assigned by {exercise.Value.Instructor.FirstName} {exercise.Value.Instructor.LastName}";
+                output.Append(studCohort);
+                output.AppendLine();
+                }
+
 
                 Console.WriteLine(output);
             }
