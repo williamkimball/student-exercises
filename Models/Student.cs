@@ -16,7 +16,7 @@ namespace nss.Data
         public static void Seed(SqliteConnection db)
         {
             db.Execute($@"INSERT INTO Student
-                SELECT null, 'William', 'Kimball', '@williamkimball',                               c.Id
+                SELECT null, 'William', 'Kimball', '@williamkimball', c.Id
                 FROM Cohort c WHERE c.Name = 'Evening Cohort 1'
             ");
             db.Execute($@"INSERT INTO Student
