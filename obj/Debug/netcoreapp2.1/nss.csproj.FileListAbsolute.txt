@@ -1,0 +1,11 @@
+/Users/williamkimball/workspace/csharp/exercises/student-exercises/bin/Debug/netcoreapp2.1/nss.deps.json
+/Users/williamkimball/workspace/csharp/exercises/student-exercises/bin/Debug/netcoreapp2.1/nss.runtimeconfig.json
+/Users/williamkimball/workspace/csharp/exercises/student-exercises/bin/Debug/netcoreapp2.1/nss.runtimeconfig.dev.json
+/Users/williamkimball/workspace/csharp/exercises/student-exercises/bin/Debug/netcoreapp2.1/nss.dll
+/Users/williamkimball/workspace/csharp/exercises/student-exercises/bin/Debug/netcoreapp2.1/nss.pdb
+/Users/williamkimball/workspace/csharp/exercises/student-exercises/obj/Debug/netcoreapp2.1/nss.csprojAssemblyReference.cache
+/Users/williamkimball/workspace/csharp/exercises/student-exercises/obj/Debug/netcoreapp2.1/nss.csproj.CoreCompileInputs.cache
+/Users/williamkimball/workspace/csharp/exercises/student-exercises/obj/Debug/netcoreapp2.1/nss.AssemblyInfoInputs.cache
+/Users/williamkimball/workspace/csharp/exercises/student-exercises/obj/Debug/netcoreapp2.1/nss.AssemblyInfo.cs
+/Users/williamkimball/workspace/csharp/exercises/student-exercises/obj/Debug/netcoreapp2.1/nss.dll
+/Users/williamkimball/workspace/csharp/exercises/student-exercises/obj/Debug/netcoreapp2.1/nss.pdb
